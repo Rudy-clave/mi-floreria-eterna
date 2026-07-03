@@ -15,7 +15,7 @@ btn.addEventListener("click", async () => {
 
         await signInWithEmailAndPassword(auth, correo, password);
 
-        window.location.href = "admin.html";
+        window.location.href = "panel-de-administracion.html";
 
     } catch (error) {
 
