@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <link rel="manifest" href="site.webmanifest">
+
+        <link rel="icon" type="image/jpeg" href="images/favicon.jpeg">
+        
+<link rel="icon" type="image/jpeg" sizes="32x32" href="images/favicon.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="images/favicon.jpeg">
+<link rel="apple-touch-icon" href="images/favicon.jpeg">
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8B4513">
+<title>Panel de Administración | Mi Florería Eterna Eli</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+
+
+<style>
+
+body{
+background:#f7f7f7;
+padding:30px;
+font-family:Poppins,sans-serif;
+}
+
+.panel{
+max-width:900px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+input,textarea,select{
+
+width:100%;
+padding:15px;
+margin-top:12px;
+margin-bottom:20px;
+border-radius:10px;
+border:1px solid #ddd;
+
+}
+
+button{
+
+background:#d63384;
+color:white;
+padding:15px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+
+}
+
+button:hover{
+
+background:#b81e6d;
+
+}
+
+</style>
+
+</head>
+
+<body>
+<script type="module" src="js/auth.js"></script>
+<div class="panel">
+
+<h2>🌸 Agregar Producto</h2>
+<button id="btnSalir">Cerrar sesión</button>
+
+<a href="index.html" target="_blank" class="btn-ver">
+👁️ Ver tienda
+</a>
+
+
+<form id="formulario">
+
+<input type="text" id="nombre" placeholder="Nombre del producto" required>
+
+<select id="categoria">
+
+<option>Girasoles</option>
+
+<option>Graduación</option>
+
+<option>Personalizados</option>
+
+<option>Temporada</option>
+
+</select>
+
+<input type="text" id="precio" placeholder="Ejemplo: Desde $250 MXN">
+
+<textarea id="descripcion" placeholder="Descripción"></textarea>
+
+<input type="text" id="imagen" placeholder="Nombre de la imagen">
+
+<button>
+
+Guardar Producto
+
+</button>
+
+</form>
+
+<hr>
+
+<h2>Productos guardados</h2>
+
+<div id="lista"></div>
+
+
+
+</div>
+
+<script>
+
+let productos=
+
+JSON.parse(localStorage.getItem("productos")) || [];
+
+const lista=document.getElementById("lista");
+
+function mostrar(){
+
+lista.innerHTML="";
+
+productos.forEach((p,i)=>{
+
+lista.innerHTML+=`
+
+<div style="padding:15px;border-bottom:1px solid #ddd;">
+
+<h3>${p.nombre}</h3>
+
+<p>${p.precio}</p>
+
+<button onclick="eliminar(${i})">
+
+Eliminar
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+mostrar();
+
+document.getElementById("formulario")
+
+.addEventListener("submit",(e)=>{
+
+e.preventDefault();
+
+productos.push({
+
+nombre:nombre.value,
+
+categoria:categoria.value,
+
+precio:precio.value,
+
+descripcion:descripcion.value,
+
+imagen:imagen.value
+
+});
+
+localStorage.setItem(
+
+"productos",
+
+JSON.stringify(productos)
+
+);
+
+mostrar();
+
+formulario.reset();
+
+});
+
+function eliminar(i){
+
+productos.splice(i,1);
+
+localStorage.setItem(
+
+"productos",
+
+JSON.stringify(productos)
+
+);
+
+mostrar();
+
+}
+
+</script>
+
+
+<script type="module">
+import { auth } from "./js/firebase-config.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+document.getElementById("btnSalir").addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "login.html";
+});
+</script>
+
+</body>
+<footer>
+
+<p>
+© 2026 Mi Florería Eterna Eli<br>
+Hecho con ❤️ para llenar de flores cada momento especial.
+</p>
+
+</footer>
+</html>

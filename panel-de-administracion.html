@@ -1,68 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-        <link rel="manifest" href="site.webmanifest">
-
-        <link rel="icon" type="image/jpeg" href="images/favicon.jpeg">
-        
-<link rel="icon" type="image/jpeg" sizes="32x32" href="images/favicon.jpeg">
-<link rel="icon" type="image/jpeg" sizes="16x16" href="images/favicon.jpeg">
-<link rel="apple-touch-icon" href="images/favicon.jpeg">
-
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#8B4513">
-<title>Panel de Administración | Mi Florería Eterna Eli</title>
+<title>Panel Admin | Mi Florería Eterna Eli</title>
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/responsive.css">
-
 
 <style>
 
 body{
-background:#f7f7f7;
-padding:30px;
-font-family:Poppins,sans-serif;
+    margin:0;
+    font-family:Poppins,sans-serif;
+    background:#f5f0ea;
 }
 
-.panel{
-max-width:900px;
-margin:auto;
-background:white;
-padding:30px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,.1);
+/* SIDEBAR */
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#8B4513;
+    position:fixed;
+    top:0;
+    left:0;
+    color:white;
+    padding:20px;
 }
 
-input,textarea,select{
+.sidebar h2{
+    font-size:18px;
+    margin-bottom:30px;
+}
 
-width:100%;
-padding:15px;
-margin-top:12px;
-margin-bottom:20px;
-border-radius:10px;
-border:1px solid #ddd;
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin:15px 0;
+    padding:10px;
+    border-radius:8px;
+}
 
+.sidebar a:hover{
+    background:rgba(255,255,255,0.2);
+}
+
+/* CONTENIDO */
+.content{
+    margin-left:240px;
+    padding:20px;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
 button{
-
-background:#d63384;
-color:white;
-padding:15px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-font-size:16px;
-
+    background:#d63384;
+    color:white;
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
 }
 
 button:hover{
-
-background:#b81e6d;
-
+    opacity:.8;
 }
 
 </style>
@@ -70,165 +83,134 @@ background:#b81e6d;
 </head>
 
 <body>
-<script type="module" src="js/auth.js"></script>
-<div class="panel">
 
-<h2>🌸 Agregar Producto</h2>
-<button id="btnSalir">Cerrar sesión</button>
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-<a href="index.html" target="_blank" class="btn-ver">
-👁️ Ver tienda
-</a>
+<h2>🌸 Admin Eli</h2>
 
+<a href="index.html" target="_blank">👁️ Ver tienda</a>
+<a href="#agregar">➕ Agregar producto</a>
+<a href="login.html" id="logout">🚪 Cerrar sesión</a>
+
+</div>
+
+<!-- CONTENIDO -->
+<div class="content">
+
+<h1>📊 Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+<h3>Total productos</h3>
+<p id="total">0</p>
+</div>
+
+<div class="card">
+<h3>Categorías</h3>
+<p>4</p>
+</div>
+
+<div class="card">
+<h3>Destacados</h3>
+<p>0</p>
+</div>
+
+</div>
+
+<hr>
+
+<h2 id="agregar">➕ Agregar producto</h2>
 
 <form id="formulario">
 
-<input type="text" id="nombre" placeholder="Nombre del producto" required>
+<input type="text" id="nombre" placeholder="Nombre" required><br><br>
 
-<select id="categoria">
+<input type="text" id="precio" placeholder="Precio"><br><br>
 
-<option>Girasoles</option>
+<input type="text" id="imagen" placeholder="Imagen"><br><br>
 
-<option>Graduación</option>
-
-<option>Personalizados</option>
-
-<option>Temporada</option>
-
-</select>
-
-<input type="text" id="precio" placeholder="Ejemplo: Desde $250 MXN">
-
-<textarea id="descripcion" placeholder="Descripción"></textarea>
-
-<input type="text" id="imagen" placeholder="Nombre de la imagen">
-
-<button>
-
-Guardar Producto
-
-</button>
+<button type="submit">Guardar</button>
 
 </form>
 
 <hr>
 
-<h2>Productos guardados</h2>
-
+<h2>📦 Lista de productos</h2>
 <div id="lista"></div>
 
-
-
 </div>
-
-<script>
-
-let productos=
-
-JSON.parse(localStorage.getItem("productos")) || [];
-
-const lista=document.getElementById("lista");
-
-function mostrar(){
-
-lista.innerHTML="";
-
-productos.forEach((p,i)=>{
-
-lista.innerHTML+=`
-
-<div style="padding:15px;border-bottom:1px solid #ddd;">
-
-<h3>${p.nombre}</h3>
-
-<p>${p.precio}</p>
-
-<button onclick="eliminar(${i})">
-
-Eliminar
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-mostrar();
-
-document.getElementById("formulario")
-
-.addEventListener("submit",(e)=>{
-
-e.preventDefault();
-
-productos.push({
-
-nombre:nombre.value,
-
-categoria:categoria.value,
-
-precio:precio.value,
-
-descripcion:descripcion.value,
-
-imagen:imagen.value
-
-});
-
-localStorage.setItem(
-
-"productos",
-
-JSON.stringify(productos)
-
-);
-
-mostrar();
-
-formulario.reset();
-
-});
-
-function eliminar(i){
-
-productos.splice(i,1);
-
-localStorage.setItem(
-
-"productos",
-
-JSON.stringify(productos)
-
-);
-
-mostrar();
-
-}
-
-</script>
-
 
 <script type="module">
-import { auth } from "./js/firebase-config.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+import { auth, db } from "./js/firebase-config.js";
+import {
+    signOut
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-document.getElementById("btnSalir").addEventListener("click", async () => {
+import {
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+/* LOGOUT */
+document.getElementById("logout").addEventListener("click", async () => {
     await signOut(auth);
-    window.location.href = "login.html";
 });
+
+/* GUARDAR PRODUCTO */
+const form = document.getElementById("formulario");
+const lista = document.getElementById("lista");
+const total = document.getElementById("total");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    await addDoc(collection(db, "productos"), {
+        nombre: nombre.value,
+        precio: precio.value,
+        imagen: imagen.value
+    });
+
+    form.reset();
+    cargar();
+});
+
+/* CARGAR PRODUCTOS */
+async function cargar(){
+
+    const querySnapshot = await getDocs(collection(db, "productos"));
+
+    lista.innerHTML = "";
+
+    total.innerText = querySnapshot.size;
+
+    querySnapshot.forEach((d) => {
+
+        lista.innerHTML += `
+        <div class="card">
+            <h3>${d.data().nombre}</h3>
+            <p>${d.data().precio}</p>
+            <button onclick="eliminar('${d.id}')">Eliminar</button>
+        </div>
+        `;
+
+    });
+
+}
+
+/* ELIMINAR */
+window.eliminar = async (id) => {
+    await deleteDoc(doc(db, "productos", id));
+    cargar();
+}
+
+cargar();
+
 </script>
 
 </body>
-<footer>
-
-<p>
-© 2026 Mi Florería Eterna Eli<br>
-Hecho con ❤️ para llenar de flores cada momento especial.
-</p>
-
-</footer>
 </html>
