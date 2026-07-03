@@ -1,0 +1,22 @@
+Mi-Floreria-Eterna-Eli/
+│
+├── index.html
+├── catalogo.html
+├── nosotros.html
+├── galeria.html
+├── cotizacion.html
+├── contacto.html
+│
+├── css/
+│   ├── style.css
+│   ├── responsive.css
+│   └── animations.css
+│
+├── js/
+│   ├── script.js
+│   ├── productos.js
+│   └── cotizacion.js
+│
+├── images/
+├── icons/
+└── assets/

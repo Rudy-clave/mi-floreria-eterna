@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head >
+        <link rel="manifest" href="site.webmanifest">
+
+    <link rel="icon" type="image/jpeg" href="images/favicon.jpeg">
+
+    
+<link rel="icon" type="image/jpeg" sizes="32x32" href="images/favicon.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="images/favicon.jpeg">
+<link rel="apple-touch-icon" href="images/favicon.jpeg">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#8B4513">
+
+<meta name="description"
+content="Solicita una cotización personalizada para arreglos florales en Florería Eterna Eli.">
+
+<title>Cotización | Florería Eterna Eli</title>
+
+<link rel="stylesheet" href="css/cotizacion.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+</head>
+
+<body>
+
+<header  data-aos="fade-down">
+
+<div class="header">
+
+<a href="index.html" class="volver">
+🏠 Inicio
+</a>
+
+<h1>🌸 Florería Eterna Eli</h1>
+
+</div>
+<h1>🌸 Cotización Personalizada</h1>
+
+<p>
+
+Cuéntanos cómo imaginas tu arreglo floral y te enviaremos una cotización por WhatsApp.
+
+</p>
+
+</header>
+
+<div class="contenedor">
+
+<form id="formCotizacion">
+
+<h2>Formulario de Cotización</h2>
+
+<label>Nombre</label>
+<input type="text" id="nombre"  autocomplete="name" required>
+
+<label>Teléfono</label>
+<input type="tel" id="telefono"   autocomplete="tel"  required>
+
+<label>Tipo de arreglo</label>
+
+<select id="tipo" required>
+<option value="" selected disabled>
+Selecciona un tipo de arreglo
+</option>
+
+<option>Ramo de rosas</option>
+<option>Caja floral</option>
+<option>Arreglo premium</option>
+<option>Graduación</option>
+<option>Boda</option>
+<option>XV Años</option>
+<option>Cumpleaños</option>
+<option>Aniversario</option>
+<option>Funeral</option>
+
+</select>
+
+<label>Color de flores</label>
+
+<input
+type="text"
+id="color"
+placeholder="Ej. Rosas rojas y blancas">
+
+<label>Presupuesto aproximado</label>
+
+<input
+type="number"
+id="presupuesto"
+required
+placeholder="$">
+
+<label>Fecha del evento</label>
+
+<input type="date" id="fecha" required>
+
+<label>Comentarios</label>
+
+<textarea
+id="comentarios"
+rows="5"
+placeholder="Describe el arreglo que deseas..."></textarea>
+<button type="submit">
+
+📩 Solicitar Cotización
+
+</button>
+
+<p class="seguridad">
+
+🔒 Tus datos solo serán utilizados para responder tu solicitud.
+
+</p>
+
+
+</form>
+
+</div>
+
+<footer data-aos="fade-up">
+
+<h3>🌸 Mi Florería Eterna Eli</h3>
+
+<p>Detalles que florecen para siempre.</p>
+
+<p>📍 Candelaria Loxicha, Oaxaca</p>
+
+<p>📱 WhatsApp: 744 225 3380</p>
+
+<p>© 2026 Todos los derechos reservados.</p>
+
+</footer>
+
+<script src="js/cotizacion.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 120
+});
+</script>
+
+</body>
+
+</html>

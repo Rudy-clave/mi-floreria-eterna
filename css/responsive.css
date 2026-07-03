@@ -1,0 +1,252 @@
+/* ============================================
+   RESPONSIVE - FLORERÍA ETERNA ELI
+   ============================================ */
+
+/* Hace que imágenes y videos nunca se salgan */
+img,
+video{
+    max-width:100%;
+    height:auto;
+}
+
+/* ============================================
+   TABLETS
+   ============================================ */
+
+@media (max-width:992px){
+
+    body{
+        overflow-x:hidden;
+    }
+
+    header{
+        padding:25px;
+    }
+
+    header h1{
+        font-size:2rem;
+    }
+
+    header p{
+        font-size:1rem;
+    }
+
+    .container,
+    .contenedor{
+        width:95%;
+        margin:auto;
+        padding:20px;
+    }
+
+    .grid,
+    .catalogo,
+    .galeria{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .card img{
+
+        height:220px;
+
+    }
+
+    footer{
+
+        padding:30px 20px;
+
+    }
+
+}
+
+/* ============================================
+   CELULARES
+   ============================================ */
+
+@media (max-width:768px){
+
+    header{
+
+        padding:20px 15px;
+
+    }
+
+    .header,
+    .header-top,
+    .menu{
+
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+
+    }
+
+    header h1{
+
+        font-size:1.8rem;
+
+    }
+
+    header p{
+
+        font-size:15px;
+
+    }
+
+    .container,
+    .contenedor{
+
+        width:95%;
+        padding:15px;
+
+    }
+
+    .grid,
+    .catalogo,
+    .galeria{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .card{
+
+        width:100%;
+
+    }
+
+    .card img{
+
+        height:250px;
+
+    }
+
+    input,
+    textarea,
+    select{
+
+        width:100%;
+        font-size:16px;
+
+    }
+
+    button,
+    .btn,
+    .boton{
+
+        width:100%;
+
+    }
+
+    .btn-back,
+    .volver,
+    .btn-inicio{
+
+        width:100%;
+        justify-content:center;
+        text-align:center;
+
+    }
+
+    footer{
+
+        text-align:center;
+
+    }
+
+}
+
+/* ============================================
+   CELULARES PEQUEÑOS
+   ============================================ */
+
+@media (max-width:480px){
+
+    header h1{
+
+        font-size:1.5rem;
+
+    }
+
+    header p{
+
+        font-size:14px;
+
+    }
+
+    .card img{
+
+        height:200px;
+
+    }
+
+    .search-box,
+    input,
+    textarea,
+    select{
+
+        font-size:15px;
+
+        padding:12px;
+
+    }
+
+    .whatsapp{
+
+        width:58px;
+        height:58px;
+        font-size:28px;
+        right:15px;
+        bottom:15px;
+
+    }
+
+    footer h2,
+    footer h3{
+
+        font-size:22px;
+
+    }
+
+    footer p{
+
+        font-size:14px;
+
+    }
+
+}
+
+/* ============================================
+   PANTALLAS GRANDES
+   ============================================ */
+
+@media (min-width:1400px){
+
+    .container,
+    .contenedor,
+    .catalogo,
+    .galeria{
+
+        max-width:1400px;
+        margin:auto;
+
+    }
+
+}
+
+/* ============================================
+   EFECTOS SUAVES
+   ============================================ */
+
+*{
+
+    transition:.3s;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
