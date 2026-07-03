@@ -28,7 +28,7 @@ imagen:"images/Tulipanes.png"
 
 {
 nombre:"Arreglo Premium",
-imagen:"images/Arreglo-presonalizado2.jpeg"
+imagen:"images/Arreglo-premium.png"
 }
 
 ];

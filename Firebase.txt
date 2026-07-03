@@ -1,0 +1,41 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCWBtT4_WOsVi6eE5W2yhF5gTKcLxfRtZY",
+  authDomain: "my-floreria-eterna-eli.firebaseapp.com",
+  projectId: "my-floreria-eterna-eli",
+  storageBucket: "my-floreria-eterna-eli.firebasestorage.app",
+  messagingSenderId: "406799933934",
+  appId: "1:406799933934:web:56643b54b795519085eeff"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+
+script
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCWBtT4_WOsVi6eE5W2yhF5gTKcLxfRtZY",
+    authDomain: "my-floreria-eterna-eli.firebaseapp.com",
+    projectId: "my-floreria-eterna-eli",
+    storageBucket: "my-floreria-eterna-eli.firebasestorage.app",
+    messagingSenderId: "406799933934",
+    appId: "1:406799933934:web:56643b54b795519085eeff"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>

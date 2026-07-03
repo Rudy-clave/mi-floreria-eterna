@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Administrador</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+body{
+background:#f5f0ea;
+font-family:Poppins,sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.login{
+
+width:380px;
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+h2{
+
+text-align:center;
+color:#8B4513;
+
+}
+
+input{
+
+width:100%;
+padding:15px;
+margin-top:15px;
+border-radius:10px;
+border:1px solid #ddd;
+
+}
+
+button{
+
+width:100%;
+padding:15px;
+margin-top:20px;
+background:#d63384;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+
+}
+
+button:hover{
+
+background:#b81e6d;
+
+}
+
+#error{
+margin-top:15px;
+color:red;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login">
+
+<h2>🌸 Mi Florería Eterna Eli</h2>
+
+<input
+type="email"
+id="correo"
+placeholder="Correo">
+
+<input
+type="password"
+id="password"
+placeholder="Contraseña">
+
+<button id="btnLogin">
+
+Iniciar sesión
+
+</button>
+
+<p id="error"></p>
+
+</div>
+
+<script type="module" src="js/login.js"></script>
+
+</body>
+</html>

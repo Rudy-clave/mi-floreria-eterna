@@ -70,10 +70,11 @@ background:#b81e6d;
 </head>
 
 <body>
-
+<script type="module" src="js/auth.js"></script>
 <div class="panel">
 
 <h2>🌸 Agregar Producto</h2>
+<button id="btnSalir">Cerrar sesión</button>
 
 <form id="formulario">
 
@@ -110,6 +111,8 @@ Guardar Producto
 <h2>Productos guardados</h2>
 
 <div id="lista"></div>
+
+
 
 </div>
 
@@ -201,6 +204,17 @@ mostrar();
 
 }
 
+</script>
+
+
+<script type="module">
+import { auth } from "./js/firebase-config.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+document.getElementById("btnSalir").addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "login.html";
+});
 </script>
 
 </body>
