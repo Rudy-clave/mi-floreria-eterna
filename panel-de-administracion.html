@@ -2,8 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Panel Admin | Mi Florería Eterna Eli</title>
+<title>Flores ETernas Eli | Admin</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -12,70 +11,81 @@
 body{
     margin:0;
     font-family:Poppins,sans-serif;
-    background:#f5f0ea;
+    background:#f7f0e8;
 }
 
-/* SIDEBAR */
-.sidebar{
-    width:220px;
-    height:100vh;
+/* HEADER ELEGANTE */
+header{
     background:#8B4513;
-    position:fixed;
-    top:0;
-    left:0;
     color:white;
+    padding:25px;
+    text-align:center;
+}
+
+/* CONTENEDOR */
+.container{
     padding:20px;
+    max-width:1000px;
+    margin:auto;
 }
 
-.sidebar h2{
-    font-size:18px;
-    margin-bottom:30px;
-}
-
-.sidebar a{
-    display:block;
-    color:white;
-    text-decoration:none;
-    margin:15px 0;
-    padding:10px;
-    border-radius:8px;
-}
-
-.sidebar a:hover{
-    background:rgba(255,255,255,0.2);
-}
-
-/* CONTENIDO */
-.content{
-    margin-left:240px;
-    padding:20px;
-}
-
-/* CARDS */
-.cards{
+/* ESTADÍSTICAS */
+.stats{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
     gap:15px;
+    margin-top:20px;
 }
 
 .card{
     background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    border-top:4px solid #d63384;
 }
 
+/* FORMULARIO */
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    border:1px solid #ddd;
+}
+
+/* BOTONES */
 button{
     background:#d63384;
     color:white;
-    padding:10px 15px;
     border:none;
-    border-radius:8px;
+    padding:10px 15px;
+    border-radius:10px;
     cursor:pointer;
 }
 
 button:hover{
-    opacity:.8;
+    opacity:.85;
+}
+
+/* LISTA PRODUCTOS */
+.producto{
+    background:white;
+    padding:15px;
+    margin-top:10px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+}
+
+a{
+    text-decoration:none;
+    color:#8B4513;
 }
 
 </style>
@@ -84,36 +94,38 @@ button:hover{
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-
-<h2>🌸 Admin Eli</h2>
-
-<a href="index.html" target="_blank">👁️ Ver tienda</a>
-<a href="#agregar">➕ Agregar producto</a>
-<a href="login.html" id="logout">🚪 Cerrar sesión</a>
-
+<header>
+<div style="text-align:center;">
+    <img src="images/Logo.jpeg" style="width:80px; border-radius:10px;">
+    <h2>🌸Flores Eternas Eli | Admin </h2>
 </div>
 
-<!-- CONTENIDO -->
-<div class="content">
 
-<h1>📊 Dashboard</h1>
+<p>Gestión de creaciones florales</p>
 
-<div class="cards">
+<div class="topbar">
+<a href="index.html" target="_blank">👁 Ver tienda</a>
+<a href="login.html">🔒 Salir</a>
+</div>
+</header>
+
+<div class="container">
+
+<!-- ESTADÍSTICAS -->
+<div class="stats">
 
 <div class="card">
-<h3>Total productos</h3>
+<h3>🌸 Productos</h3>
 <p id="total">0</p>
 </div>
 
 <div class="card">
-<h3>Categorías</h3>
+<h3>🌺 Colecciones</h3>
 <p>4</p>
 </div>
 
 <div class="card">
-<h3>Destacados</h3>
+<h3>💎 Destacados</h3>
 <p>0</p>
 </div>
 
@@ -121,33 +133,32 @@ button:hover{
 
 <hr>
 
-<h2 id="agregar">➕ Agregar producto</h2>
+<!-- FORM -->
+<h3>➕ Nueva creación floral</h3>
 
 <form id="formulario">
 
-<input type="text" id="nombre" placeholder="Nombre" required><br><br>
+<input type="text" id="nombre" placeholder="Nombre del arreglo">
 
-<input type="text" id="precio" placeholder="Precio"><br><br>
+<input type="text" id="precio" placeholder="Precio">
 
-<input type="text" id="imagen" placeholder="Imagen"><br><br>
+<input type="text" id="imagen" placeholder="Imagen">
 
-<button type="submit">Guardar</button>
+<button type="submit">Guardar creación</button>
 
 </form>
 
 <hr>
 
-<h2>📦 Lista de productos</h2>
+<!-- LISTA -->
+<h3>📦 Catálogo floral</h3>
 <div id="lista"></div>
 
 </div>
 
 <script type="module">
-import { auth, db } from "./js/firebase-config.js";
-import {
-    signOut
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
+import { db } from "./js/firebase-config.js";
 import {
     collection,
     addDoc,
@@ -156,43 +167,36 @@ import {
     doc
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-/* LOGOUT */
-document.getElementById("logout").addEventListener("click", async () => {
-    await signOut(auth);
-});
-
-/* GUARDAR PRODUCTO */
-const form = document.getElementById("formulario");
-const lista = document.getElementById("lista");
-const total = document.getElementById("total");
-
-form.addEventListener("submit", async (e) => {
+/* GUARDAR */
+document.getElementById("formulario").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    await addDoc(collection(db, "productos"), {
-        nombre: nombre.value,
-        precio: precio.value,
-        imagen: imagen.value
+    await addDoc(collection(db,"productos"),{
+        nombre:nombre.value,
+        precio:precio.value,
+        imagen:imagen.value
     });
 
     form.reset();
     cargar();
 });
 
-/* CARGAR PRODUCTOS */
+/* CARGAR */
+const lista=document.getElementById("lista");
+const total=document.getElementById("total");
+
 async function cargar(){
 
-    const querySnapshot = await getDocs(collection(db, "productos"));
+    const data=await getDocs(collection(db,"productos"));
 
-    lista.innerHTML = "";
+    lista.innerHTML="";
+    total.innerText=data.size;
 
-    total.innerText = querySnapshot.size;
+    data.forEach(d=>{
 
-    querySnapshot.forEach((d) => {
-
-        lista.innerHTML += `
-        <div class="card">
-            <h3>${d.data().nombre}</h3>
+        lista.innerHTML+=`
+        <div class="producto">
+            <h3>🌸 ${d.data().nombre}</h3>
             <p>${d.data().precio}</p>
             <button onclick="eliminar('${d.id}')">Eliminar</button>
         </div>
@@ -203,8 +207,8 @@ async function cargar(){
 }
 
 /* ELIMINAR */
-window.eliminar = async (id) => {
-    await deleteDoc(doc(db, "productos", id));
+window.eliminar=async(id)=>{
+    await deleteDoc(doc(db,"productos",id));
     cargar();
 }
 
