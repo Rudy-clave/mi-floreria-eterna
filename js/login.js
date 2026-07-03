@@ -15,9 +15,12 @@ btn.addEventListener("click", async () => {
 
         await signInWithEmailAndPassword(auth, correo, password);
 
+        // Redirigir al panel correcto
         window.location.href = "panel-de-administracion.html";
 
     } catch (error) {
+
+        console.error(error);
 
         document.getElementById("error").innerHTML =
             "Correo o contraseña incorrectos.";
