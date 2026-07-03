@@ -195,28 +195,45 @@ AOS.init({
 
 // ===== Acceso secreto del administrador =====
 
-let contador = 0;
-let tiempo;
 
-const logo = document.getElementById("logoAdmin");
 
-logo.addEventListener("click", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-    contador++;
+    console.log("SCRIPT LOGO CARGADO");
 
-    clearTimeout(tiempo);
+    const logo = document.getElementById("logoAdmin");
 
-    tiempo = setTimeout(() => {
-        contador = 0;
-    }, 2000);
+    console.log("LOGO:", logo);
 
-    if (contador === 5) {
+    if (!logo) return;
 
-        window.location.href = "login.html";
+    let contador = 0;
+    let timer;
 
-    }
+    logo.addEventListener("click", () => {
+
+        contador++;
+
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            contador = 0;
+        }, 2000);
+
+        console.log("Clicks:", contador);
+
+        if (contador === 5) {
+            window.location.href = "login.html";
+        }
+
+    });
 
 });
+</script>
+
+
+
+
 </script>
 
 
