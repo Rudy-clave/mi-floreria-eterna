@@ -142,6 +142,25 @@ right:20px;
 z-index:999;
 }
 
+.logo{
+    cursor:pointer;
+    user-select:none;
+}
+
+.logo:active{
+    transform:scale(.98);
+}
+
+.logo{
+    transition:.2s;
+}
+
+.logo:hover{
+    transform:scale(1.03);
+}
+
+
+
 .admin-link{
 display:inline-block;
 margin-top:20px;

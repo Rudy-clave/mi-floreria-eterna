@@ -27,7 +27,7 @@
 
 <header data-aos="fade-down">
 
-<div class="logo">
+<div class="logo" id="logoAdmin" >
 <h1>🌸 Mi Florería Eterna Eli</h1>
 <p>Detalles que florecen para siempre</p>
 </div>
@@ -183,6 +183,42 @@ async function cargarProductos() {
 
 cargarProductos();
 </script>
+
+
+
+<script>
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 120
+});
+
+// ===== Acceso secreto del administrador =====
+
+let contador = 0;
+let tiempo;
+
+const logo = document.getElementById("logoAdmin");
+
+logo.addEventListener("click", () => {
+
+    contador++;
+
+    clearTimeout(tiempo);
+
+    tiempo = setTimeout(() => {
+        contador = 0;
+    }, 2000);
+
+    if (contador === 5) {
+
+        window.location.href = "login.html";
+
+    }
+
+});
+</script>
+
 
 
 
