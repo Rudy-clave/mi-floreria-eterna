@@ -161,6 +161,35 @@ z-index:999;
 
 
 
+.btn-volver, .btn-ver{
+    display:inline-block;
+    margin:10px 10px 20px 0;
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.btn-volver{
+    background:#8B4513;
+    color:white;
+}
+
+.btn-ver{
+    background:#d63384;
+    color:white;
+}
+
+.btn-volver:hover,
+.btn-ver:hover{
+    opacity:.8;
+}
+
+
+
+
+
 .admin-link{
 display:inline-block;
 margin-top:20px;
