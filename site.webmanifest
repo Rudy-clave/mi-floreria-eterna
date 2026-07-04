@@ -1,0 +1,9 @@
+{
+  "name": "Mi Florería Eterna Eli",
+  "short_name": "Florería",
+  "start_url": "/mi-floreria-eterna/",
+  "display": "standalone",
+  "background_color": "#fff7f8",
+  "theme_color": "#ff4d6d",
+  "icons": []
+}
