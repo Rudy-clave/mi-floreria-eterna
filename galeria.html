@@ -2,27 +2,22 @@
 <html lang="es">
 
 <head>
-        <link rel="manifest" href="site.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" type="image/jpeg" href="images/favicon.jpeg">
+    <title>Galería | Florería Eterna Eli</title>
 
-    
-<link rel="icon" type="image/jpeg" sizes="32x32" href="images/favicon.jpeg">
-<link rel="icon" type="image/jpeg" sizes="16x16" href="images/favicon.jpeg">
-<link rel="apple-touch-icon" href="images/favicon.jpeg">
-<link rel="stylesheet" href="css/style.css?v=2.0">
-<script type="module" src="js/login.js?v=2.0"></script>
+    <meta name="theme-color" content="#8B4513">
 
+    <link rel="manifest" href="site.webmanifest">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#8B4513">
+    <link rel="icon" href="images/favicon.jpeg">
 
-<title>Galería | Florería Eterna Eli</title>
+    <link rel="stylesheet" href="css/style.css?v=3.0">
+    <link rel="stylesheet" href="css/galeria.css?v=3.0">
+    <link rel="stylesheet" href="css/responsive.css?v=3.0">
 
-<link rel="stylesheet" href="css/galeria.css">
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
 </head>
 
@@ -30,76 +25,71 @@
 
 <header data-aos="fade-down">
 
-
     <div class="brand">
-  <img src="images/Logo.jpeg" alt="Logo" class="logo">
-  <span class="brand-text">🌸Flores Eternas Eli  </span>
-</div>
+        <img src="images/Logo.jpeg" alt="Logo" class="logo">
+        <span class="brand-text">🌸 Flores Eternas Eli</span>
+    </div>
 
-<div class="header"  data-aos="zoom-in">
+    <div class="header" data-aos="zoom-in">
 
-<a href="index.html" class="volver">
-🏠 Inicio
-</a>
+        <a href="index.html" class="volver">🏠 Inicio</a>
 
-<h1>🌸 Galería Floral</h1>
+        <h1>🌸 Galería Floral</h1>
 
-</div>
+    </div>
 
-<p>
-Conoce algunos de nuestros arreglos florales.
-</p>
+    <p>Conoce algunos de nuestros arreglos florales.</p>
 
 </header>
 
-<section class="busqueda" data-aos="fade-right">
+<!-- FILTROS -->
+<section class="busqueda" data-aos="fade-up">
 
-<input
-data-aos="fade-up"
-type="text"
-class="search-box"
-id="buscar"
-placeholder="Buscar arreglo floral..."
->
-
-</section>
-
-<section id="galeria" class="galeria" data-aos="fade-right">
+    <input
+        type="text"
+        class="search-box"
+        id="buscar"
+        placeholder="Buscar arreglo floral..."
+    >
 
 </section>
 
+<!-- GALERÍA -->
+<section id="galeria" class="grid-galeria" data-aos="fade-up"></section>
+
+<!-- MODAL VISOR -->
 <div id="visor" class="visor">
 
-<span id="cerrar">&times;</span>
+    <span id="cerrar">&times;</span>
 
-<img id="imagenGrande">
+    <img id="imagenGrande" alt="Imagen grande">
 
-<p id="titulo"></p>
+    <p id="titulo"></p>
 
 </div>
 
+<!-- WHATSAPP -->
 <a
-class="whatsapp"
-target="_blank"
-href="https://wa.me/5217442253380">
+    class="whatsapp"
+    target="_blank"
+    href="https://wa.me/5217442253380">
 
-💬
+    💬
 
 </a>
 
 <footer data-aos="fade-up">
 
-<p>
-© 2026 Mi Florería Eterna Eli<br>
-Hecho con ❤️ para llenar de flores cada momento especial.
-</p>
+    <p>
+        © 2026 Mi Florería Eterna Eli<br>
+        Hecho con ❤️ para llenar de flores cada momento especial.
+    </p>
 
+    <h2>Florería Eterna Eli</h2>
 
-<h2>Florería Eterna Eli</h2>
+    <p>Arreglos florales para toda ocasión.</p>
 
-<p>Arreglos florales para toda ocasión.</p>
-
-<p>WhatsApp: 744 225 3380</p>
+    <p>WhatsApp: 744 225 3380</p>
 
 </footer>
 
@@ -114,6 +104,7 @@ AOS.init({
     offset: 120
 });
 </script>
+
 </body>
 
 </html>
