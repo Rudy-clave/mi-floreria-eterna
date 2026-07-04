@@ -54,7 +54,7 @@ nav a:hover{
     align-items:center;
     text-align:center;
     padding:40px;
-    background:linear-gradient(rgba(255,255,255,.75),rgba(255,255,255,.75)), url("../images/portada.jpg");
+    background:linear-gradient(rgba(255,255,255,.75),rgba(255,255,255,.75)), url("../images/logo.jpeg");
     background-size:cover;
     background-position:center;
 }
