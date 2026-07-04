@@ -36,6 +36,26 @@ text-align:center;
 
 }
 
+
+.brand{
+  display: flex;
+  align-items: center;   /* centra verticalmente */
+  gap: 10px;             /* espacio entre logo y texto */
+}
+
+.logo{
+  width: 45px;           /* ajusta según tu logo */
+  height: 45px;
+  object-fit: contain;   /* evita que se deforme */
+  border-radius: 50%;    /* opcional: lo hace más elegante si es icono */
+}
+
+.brand-text{
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff; /* o el color de tu diseño */
+}
+
 .header{
    display:flex;
     justify-content:space-between;

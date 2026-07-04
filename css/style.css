@@ -13,11 +13,11 @@ body{
 }
 
 header{
-    background:#ffffff;
+     background:#ffffff;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:20px 8%;
+    padding:18px 8%;
     position:sticky;
     top:0;
     box-shadow:0 2px 10px rgba(0,0,0,.08);
@@ -72,6 +72,10 @@ nav a:hover{
 }
 
 .boton{
+   display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
     background:#d63384;
     color:white;
     padding:15px 35px;
@@ -142,22 +146,13 @@ right:20px;
 z-index:999;
 }
 
-.logo{
-    cursor:pointer;
-    user-select:none;
-}
+
 
 .logo:active{
     transform:scale(.98);
 }
 
-.logo{
-    transition:.2s;
-}
 
-.logo:hover{
-    transform:scale(1.03);
-}
 
 
 
@@ -211,12 +206,7 @@ color:#8B4513;
     margin-right: 8px;
 }
 
-.boton{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
+
 .whatsapp-float img{
 width:65px;
 transition:.3s;
@@ -245,4 +235,40 @@ transform:scale(1.1);
 
 .whatsapp:hover{
     transform:scale(1.1);
+}
+
+
+
+
+.brand{
+
+  display: flex;
+  align-items: center;   /* centra verticalmente */
+  gap: 10px;             /* espacio entre logo y texto */
+}
+
+
+
+.brand-text{
+   font-size:18px;
+    font-weight:700;
+    color:#c2185b;
+}
+
+
+
+.logo{
+    width:30px;
+    height:30px;
+    object-fit:cover;
+    border-radius:50%;
+    background:white;
+    padding:2px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.12);
+    display:block;
+    transition:.2s;
+}
+
+.logo:hover{
+    transform:scale(1.05);
 }
