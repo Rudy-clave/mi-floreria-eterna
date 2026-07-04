@@ -1,38 +1,17 @@
-
 import { auth } from "./firebase-config.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-import {
-    signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+document.addEventListener("DOMContentLoaded", () => {
 
-const btn = document.getElementById("btnLogin");
+    const btn = document.getElementById("btnLogin");
 
-btn.addEventListener("click", async () => {
-
-    const correo = document.getElementById("correo").value.trim();
-    const password = document.getElementById("password").value;
-
-    try {
-
-        await signInWithEmailAndPassword(auth, correo, password);
-
-        // Redirigir al panel correcto
-        window.location.href = "panel-de-administracion.html";
-
-    } catch (error) {
-
-        console.error(error);
-
-        document.getElementById("error").innerHTML =
-            "Correo o contraseña incorrectos.";
-
+    if (!btn) {
+        console.log("No existe btnLogin en esta página");
+        return;
     }
 
-
-const btn = document.getElementById("btnLogin");
-
-if (btn) {
     btn.addEventListener("click", async () => {
+
         const correo = document.getElementById("correo").value.trim();
         const password = document.getElementById("password").value;
 
@@ -43,8 +22,7 @@ if (btn) {
             document.getElementById("error").textContent =
                 "Correo o contraseña incorrectos.";
         }
-    });
-}
 
+    });
 
 });
