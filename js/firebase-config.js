@@ -1,5 +1,10 @@
 // js/firebase-config.js
 
+
+
+import { getStorage } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js"; // 👈 FALTABA
+
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
