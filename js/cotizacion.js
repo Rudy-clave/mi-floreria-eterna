@@ -1,3 +1,4 @@
+<script type="module" src="js/login.js?v=2.0"></script>
 document
 .getElementById("formCotizacion")
 .addEventListener("submit",function(e){

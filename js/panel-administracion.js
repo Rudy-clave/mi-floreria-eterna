@@ -1,3 +1,4 @@
+<script type="module" src="js/login.js?v=2.0"></script>
 import { db, storage } from "./js/firebase-config.js";
 
 import {
