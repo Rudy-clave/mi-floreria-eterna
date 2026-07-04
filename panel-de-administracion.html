@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Flores ETernas Eli | Admin</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/panel-administracion.css">
 
 <style>
 
@@ -96,20 +96,26 @@ a{
 
 <header>
 
-<div class="brand">
-  <img src="images/Logo.jpeg" alt="Logo" class="logo">
-  <span class="brand-text">🌸Flores Eternas Eli | Admin </span>
-</div>
+ <div class="header-content">
 
+    <div class="brand">
+      <div class="logo-box">
+        <img src="images/Logo.jpeg" alt="Logo" class="logo">
+      </div>
+      <span class="brand-text">Mi Florería Eterna</span>
+    </div>
 
+    <a href="index.html" class="volver">🏠 Inicio</a>
 
+  </div>
 
-<p>Gestión de creaciones florales</p>
+  <p class="subtitulo">Gestión de creaciones florales</p>
 
-<div class="topbar">
-<a href="index.html" target="_blank">👁 Ver tienda</a>
-<a href="login.html">🔒 Salir</a>
-</div>
+  <div class="topbar">
+    <a href="index.html" target="_blank">👁 Ver tienda</a>
+    <a href="login.html">🔒 Salir</a>
+  </div>
+
 </header>
 
 <div class="container">
@@ -137,21 +143,31 @@ a{
 <hr>
 
 <!-- FORM -->
-<h3>➕ Nueva creación floral</h3>
+<<h3>➕ Nueva creación floral</h3>
 
-<form id="formulario">
+<form id="formulario" class="form">
 
 <input type="text" id="nombre" placeholder="Nombre del arreglo">
 
 <input type="text" id="precio" placeholder="Precio">
 
-<input type="text" id="imagen" placeholder="Imagen">
+<!-- BOTÓN ARCHIVO BONITO -->
+<div class="file-box">
+    <button type="button" id="btnFile">📷 Seleccionar imagen</button>
+    <span id="fileName">Ningún archivo</span>
+</div>
 
-<button type="submit">Guardar creación</button>
+<input type="file" id="imagen" hidden accept="image/*">
+
+<button type="submit">💾 Guardar creación</button>
+
+<p id="mensaje"></p>
 
 </form>
 
 <hr>
+
+<div id="carrusel" class="carrusel"></div>
 
 <!-- LISTA -->
 <h3>📦 Catálogo floral</h3>

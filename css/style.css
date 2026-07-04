@@ -10,6 +10,9 @@ body{
     font-family:'Poppins',sans-serif;
     background:#fff7fb;
     color:#333;
+     overflow-x:hidden;
+  
+
 }
 
 header{
@@ -301,6 +304,66 @@ transform:scale(1.1);
 
 .slide.activo{
     opacity:1;
+}
+
+img{
+    max-width:100%;
+    height:auto;
+    display:block;
+}
+
+
+
+/* Mejora general responsive */
+@media (max-width: 768px){
+    .hero h2{
+        font-size:2rem;
+    }
+
+    .contenedor,
+    .galeria,
+    .productos{
+        grid-template-columns:1fr !important;
+    }
+
+    .slides{
+        height:250px !important;
+         width:100%;
+    height:100%;
+    object-fit:cover;
+    }
+}
+
+.btn-volver{
+    background:#ff4d6d;
+    color:white;
+    padding:10px 15px;
+    border-radius:10px;
+    text-decoration:none;
+    display:inline-block;
+    margin-top:10px;
+}
+
+.btn-volver:hover{
+    background:#a3154b;
+    transform:scale(1.05);
+   
+}
+
+.panel-admin{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+h1,h2,h3{
+    color:#c2185b;
+}
+
+label, p{
+    color:#444;
+    font-weight:500;
 }
 
 
