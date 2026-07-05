@@ -21,7 +21,7 @@ const flores = [
 },
 {
     nombre:"Caja de Rosas",
-    imagen:"images/Caja-rosas.jpg",
+    imagen:"images/Caja-Rosas.jpg",
     categoria:"rosas"
 },
 {
