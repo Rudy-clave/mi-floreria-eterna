@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Flores ETernas Eli | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover">
+<title>Flores ETernas Eli | Panel de  Administracion </title>
 
 <link rel="stylesheet" href="css/panel-administracion.css">
 <link rel="stylesheet" href="css/style.css?v=2.0">
-<script type="module" src="js/login.js?v=2.1"></script>
 
 
 <style>
@@ -19,7 +19,7 @@ body{
 
 /* HEADER ELEGANTE */
 header{
-    background:#8B4513;
+    background:#b8d1e0;
     color:white;
     padding:25px;
     text-align:center;
@@ -71,6 +71,14 @@ button:hover{
     opacity:.85;
 }
 
+.btn-eliminar{
+    background:#e74c3c;
+}
+
+.btn-eliminar:hover{
+    background:#c0392b;
+}
+
 /* LISTA PRODUCTOS */
 .producto{
     background:white;
@@ -89,6 +97,92 @@ button:hover{
 a{
     text-decoration:none;
     color:#8B4513;
+}
+
+
+.preview-box{
+    margin-top:15px;
+    text-align:center;
+}
+
+#preview{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:15px;
+    border:2px dashed #d63384;
+    padding:5px;
+}
+
+
+/*=========================
+    MODAL
+=========================*/
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.55);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.modal-contenido{
+
+    background:white;
+
+    width:420px;
+
+    max-width:90%;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 40px rgba(0,0,0,.25);
+
+}
+
+.modal-contenido h2{
+
+    margin-top:0;
+
+    color:#8B4513;
+
+    text-align:center;
+
+}
+
+.modal-botones{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+
+.cancelar{
+
+    background:#777;
+
 }
 
 </style>
@@ -166,6 +260,17 @@ a{
 
 <input type="file" id="imagen" hidden accept="image/*">
 
+<div class="preview-box">
+    <img
+    id="preview"
+    src=""
+    alt="Vista previa"
+    style="display:none;width:220px;height:220px;object-fit:cover;border-radius:15px;"
+>
+</div>
+
+
+
 <button type="submit">💾 Guardar creación</button>
 
 <p id="mensaje"></p>
@@ -182,65 +287,46 @@ a{
 
 </div>
 
-<script type="module">
 
-import { db } from "./js/firebase-config.js";
-import {
-    collection,
-    addDoc,
-    getDocs,
-    deleteDoc,
-    doc
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-/* GUARDAR */
-document.getElementById("formulario").addEventListener("submit", async (e) => {
-    e.preventDefault();
+<!-- ==========================
+     MODAL EDITAR PRODUCTO
+========================== -->
 
-    await addDoc(collection(db,"productos"),{
-        nombre:nombre.value,
-        precio:precio.value,
-        imagen:imagen.value
-    });
+<div id="modalEditar" class="modal">
 
-    form.reset();
-    cargar();
-});
+    <div class="modal-contenido">
 
-/* CARGAR */
-const lista=document.getElementById("lista");
-const total=document.getElementById("total");
+        <h2>✏️ Editar producto</h2>
 
-async function cargar(){
+        <input
+            type="text"
+            id="editarNombre"
+            placeholder="Nombre del arreglo"
+        >
 
-    const data=await getDocs(collection(db,"productos"));
+        <input
+            type="number"
+            id="editarPrecio"
+            placeholder="Precio"
+        >
 
-    lista.innerHTML="";
-    total.innerText=data.size;
+        <div class="modal-botones">
 
-    data.forEach(d=>{
+            <button id="guardarCambios">
+                💾 Guardar cambios
+            </button>
 
-        lista.innerHTML+=`
-        <div class="producto">
-            <h3>🌸 ${d.data().nombre}</h3>
-            <p>${d.data().precio}</p>
-            <button onclick="eliminar('${d.id}')">Eliminar</button>
+            <button id="cerrarModal" class="cancelar">
+                Cancelar
+            </button>
+
         </div>
-        `;
 
-    });
+    </div>
 
-}
+</div>
 
-/* ELIMINAR */
-window.eliminar=async(id)=>{
-    await deleteDoc(doc(db,"productos",id));
-    cargar();
-}
-
-cargar();
-
-</script>
-
+<script type="module" src="js/panel-administracion.js?v=2"></script>
 </body>
 </html>

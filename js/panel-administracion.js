@@ -1,118 +1,336 @@
-<script type="module" src="js/login.js?v=2.0"></script>
-import { db, storage } from "./js/firebase-config.js";
+import { db } from "./firebase-config.js";
 
 import {
   collection,
   addDoc,
   getDocs,
   deleteDoc,
+  updateDoc,
   doc
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
-
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js";
-
 /* ELEMENTOS */
 const form = document.getElementById("formulario");
-const lista = document.getElementById("carrusel");
+const lista = document.getElementById("lista");
 const total = document.getElementById("total");
+
 const inputFile = document.getElementById("imagen");
 const btnFile = document.getElementById("btnFile");
 const fileName = document.getElementById("fileName");
 const mensaje = document.getElementById("mensaje");
+const preview = document.getElementById("preview");
 
-/* BOTÓN FILE */
+
+/* ==========================
+   MODAL EDITAR
+========================== */
+
+const modal = document.getElementById("modalEditar");
+const editarNombre = document.getElementById("editarNombre");
+const editarPrecio = document.getElementById("editarPrecio");
+const guardarCambios = document.getElementById("guardarCambios");
+const cerrarModal = document.getElementById("cerrarModal");
+
+let productoEditando = null;
+
+
+
+
+
+
+
+/* ABRIR FILE */
 btnFile.addEventListener("click", () => {
   inputFile.click();
 });
 
-inputFile.addEventListener("change", () => {
-  fileName.textContent =
-    inputFile.files[0]?.name || "Ningún archivo";
+/* PREVIEW */
+inputFile.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+
+  if (!file) return;
+
+  fileName.textContent = file.name;
+
+  const reader = new FileReader();
+
+  reader.onload = (event) => {
+    preview.src = event.target.result;
+    preview.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
 });
 
-/* GUARDAR */
+/* ==========================
+   COMPRIMIR IMAGEN
+========================== */
+
+function comprimirImagen(file) {
+
+  return new Promise((resolve) => {
+
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+
+      const img = new Image();
+
+      img.onload = () => {
+
+        const canvas = document.createElement("canvas");
+
+        const MAX = 600;
+
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+
+          if (width > MAX) {
+            height *= MAX / width;
+            width = MAX;
+          }
+
+        } else {
+
+          if (height > MAX) {
+            width *= MAX / height;
+            height = MAX;
+          }
+
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        resolve(
+          canvas.toDataURL("image/jpeg", 0.55)
+        );
+
+      };
+
+      img.src = event.target.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+
+
+/* ==========================
+   GUARDAR PRODUCTO
+========================== */
+
 form.addEventListener("submit", async (e) => {
-  e.preventDefault();
 
-  const nombre = document.getElementById("nombre").value.trim();
-  const precio = document.getElementById("precio").value.trim();
-  const file = inputFile.files[0];
+    e.preventDefault();
 
-  if (!nombre || !precio) {
-    mensaje.innerText = "⚠️ Completa los campos";
-    return;
-  }
+    const nombre = document.getElementById("nombre").value.trim();
+    const precio = document.getElementById("precio").value.trim();
+    const file = inputFile.files[0];
 
-  if (!file) {
-    mensaje.innerText = "⚠️ Selecciona una imagen";
-    return;
-  }
+    if (!nombre || !precio || !file) {
 
-  try {
-    mensaje.innerText = "⏳ Subiendo imagen...";
+        mensaje.textContent = "⚠️ Completa todos los campos";
+        return;
 
-    const storageRef = ref(
-      storage,
-      `productos/${Date.now()}_${file.name}`
-    );
+    }
 
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
+    try {
 
-    await addDoc(collection(db, "productos"), {
-      nombre,
-      precio,
-      imagen: url
-    });
+        mensaje.textContent = "Comprimiendo imagen...";
 
-    mensaje.innerText = "✔ Guardado correctamente";
+        // Comprimir la imagen
+        const imagenComprimida = await comprimirImagen(file);
 
-    form.reset();
-    fileName.textContent = "Ningún archivo";
+        mensaje.textContent = "Guardando producto...";
 
-    cargar();
+        await addDoc(collection(db, "productos"), {
 
-  } catch (error) {
-    console.error(error);
-    mensaje.innerText = "❌ Error al subir";
-  }
+            nombre,
+            precio,
+            imagen: imagenComprimida
+
+        });
+
+        mensaje.textContent = "✅ Producto guardado";
+
+        form.reset();
+
+        preview.src = "";
+        preview.style.display = "none";
+
+        fileName.textContent = "Ningún archivo";
+
+        cargar();
+
+    } catch (error) {
+
+        console.error(error);
+
+        mensaje.textContent = "❌ Error al guardar";
+
+    }
+
 });
 
 /* CARGAR */
 async function cargar() {
   try {
-    const data = await getDocs(collection(db, "productos"));
+    const snap = await getDocs(collection(db, "productos"));
 
     lista.innerHTML = "";
-    total.innerText = data.size;
+    total.textContent = snap.size;
 
-    data.forEach((d) => {
+    snap.forEach((d) => {
       const p = d.data();
 
-      lista.innerHTML += `
-        <div class="producto">
-          <img src="${p.imagen}">
-          <h3>${p.nombre}</h3>
-          <p>$${p.precio}</p>
-          <button onclick="eliminar('${d.id}')">Eliminar</button>
-        </div>
+      const card = document.createElement("div");
+      card.classList.add("producto");
+
+      card.innerHTML = `
+        <img src="${p.imagen}" style="
+          width:180px;
+          height:180px;
+          object-fit:cover;
+          border-radius:12px;
+        ">
+
+        <h3>🌸 ${p.nombre}</h3>
+        <p>$${p.precio}</p>
       `;
+
+      // =========================
+      // BOTÓN EDITAR (MEJORADO)
+      // =========================
+      const btnEditar = document.createElement("button");
+      btnEditar.textContent = "✏️ Editar";
+      btnEditar.addEventListener("click", () => editar(d.id));
+
+      // =========================
+      // BOTÓN ELIMINAR (MEJORADO)
+      // =========================
+      const btnEliminar = document.createElement("button");
+      btnEliminar.textContent = "🗑 Eliminar";
+
+   btnEliminar.addEventListener("click", async () => {
+
+  const confirmar = window.confirm("¿Eliminar este producto?");
+
+  console.log("Confirmación:", confirmar);
+
+  if (!confirmar) return;
+
+  try {
+    btnEliminar.textContent = "Eliminando...";
+    btnEliminar.disabled = true;
+
+    await deleteDoc(doc(db, "productos", d.id));
+
+    card.remove();
+
+    total.textContent = Number(total.textContent) - 1;
+
+  } catch (error) {
+    console.error(error);
+    alert("Error al eliminar");
+    btnEliminar.textContent = "🗑 Eliminar";
+    btnEliminar.disabled = false;
+  }
+});
+
+      // contenedor botones
+      const contBtns = document.createElement("div");
+      contBtns.style.display = "flex";
+      contBtns.style.gap = "10px";
+      contBtns.style.marginTop = "10px";
+
+      contBtns.appendChild(btnEditar);
+      contBtns.appendChild(btnEliminar);
+
+      card.appendChild(contBtns);
+      lista.appendChild(card);
     });
 
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     lista.innerHTML = "<p>Error al cargar productos</p>";
   }
 }
 
-/* ELIMINAR */
-window.eliminar = async (id) => {
-  await deleteDoc(doc(db, "productos", id));
-  cargar();
+/* ==========================
+   EDITAR PRODUCTO
+========================== */
+
+window.editar = async (id) => {
+
+    const snap = await getDocs(collection(db, "productos"));
+
+    snap.forEach((d) => {
+
+        if (d.id === id) {
+
+            editarNombre.value = d.data().nombre;
+            editarPrecio.value = d.data().precio;
+
+        }
+
+    });
+
+    productoEditando = id;
+
+    modal.style.display = "flex";
+
 };
+
+
+
+/* ==========================
+   GUARDAR CAMBIOS
+========================== */
+
+guardarCambios.addEventListener("click", async () => {
+
+    try {
+
+        await updateDoc(doc(db, "productos", productoEditando), {
+
+            nombre: editarNombre.value,
+            precio: editarPrecio.value
+
+        });
+
+        modal.style.display = "none";
+
+        mensaje.textContent = "✅ Producto actualizado";
+
+        cargar();
+
+    } catch (error) {
+
+        console.error(error);
+
+        mensaje.textContent = "❌ Error al actualizar";
+
+    }
+
+});
+
+/* CERRAR MODAL */
+
+cerrarModal.addEventListener("click", () => {
+
+    modal.style.display = "none";
+
+});
+
 
 cargar();

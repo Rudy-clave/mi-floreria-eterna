@@ -1,35 +1,34 @@
-<script type="module" src="js/login.js?v=2.0"></script>
 const productos=[
 
 {
 nombre:"Ramo de Rosas Rojas",
-imagen:"images/Ramo-rosas.png"
+imagen:"./images/Ramo-rosas.png"
 },
 
 {
 nombre:"Rosas Blancas",
-imagen:"images/Rosas-blancas.png"
+imagen:"./images/Rosas-blancas.png"
 },
 
 {
 nombre:"Caja Floral",
-imagen:"images/Caja-Rosas.jpg"
+imagen:"./images/Caja-Rosas.jpg"
 },
 
 {
 nombre:"Girasoles",
-imagen:"images/Girasoles.png",
+imagen:"./images/Girasoles.png",
 
 },
 
 {
 nombre:"Tulipanes",
-imagen:"images/Tulipanes.png"
+imagen:"./images/Tulipanes.png"
 },
 
 {
 nombre:"Arreglo Premium",
-imagen:"images/Arreglo-premium.png"
+imagen:"./images/Arreglo-premium.png"
 }
 
 ];

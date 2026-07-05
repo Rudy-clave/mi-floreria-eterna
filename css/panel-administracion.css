@@ -5,6 +5,24 @@ body{
   padding:20px;
 }
 
+
+/*====BOTON ELIMINAR*/
+.btn-eliminar{
+  background:#e74c3c !important;
+  color:white;
+  border:none;
+  padding:10px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn-eliminar:hover{
+  background:#c0392b !important;
+  transform:scale(1.05);
+}
+
+
 /* ===== BOTÓN VOLVER ===== */
 .btn-volver{
   display:inline-block;
